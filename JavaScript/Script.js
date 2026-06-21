@@ -1,4 +1,6 @@
-
+/**
+ * SKINRY – Script.js (Upgraded v2)
+ */
 'use strict';
 
 /* ============================================================
@@ -74,10 +76,9 @@
             // 2) Set status aktif/bold SEKETIKA saat diklik
             setActiveSection(sectionId);
 
-            // 3) Update URL tanpa reload
-            history.pushState(null, '', hash);
-
-            // 4) Scroll halus ke section yang benar
+            // 3) Scroll halus ke section yang benar
+            //    (URL TIDAK diubah — domain tetap bersih, tidak ada "#section"
+            //    yang ditambahkan ke address bar)
             isClickScrolling = true;
             scrollToSection(hash);
 
@@ -155,7 +156,7 @@
             const navOffset = navInner ? navInner.offsetHeight : 80;
             const top = target.getBoundingClientRect().top + window.scrollY - navOffset - 4;
             window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
-            history.pushState(null, '', id);
+            // URL TIDAK diubah — domain tetap bersih, tanpa "#section" di address bar
         });
     });
 })();
