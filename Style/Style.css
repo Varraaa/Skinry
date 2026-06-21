@@ -1,5 +1,5 @@
 /* ============================================================
-   SKINRY – Style.css  (Upgraded v2)
+   SKINRY – Style.css
    ============================================================ */
 
 :root {
@@ -139,10 +139,6 @@ address {
     padding-block: var(--space-3xl);
 }
 
-/* Performance: lewati kalkulasi layout/paint untuk section di bawah fold
-   sampai pengguna scroll mendekatinya — mempercepat render awal (FCP/LCP)
-   baik di desktop maupun mobile. contain-intrinsic-size mencegah layout
-   shift dengan memberi perkiraan tinggi sebelum section benar-benar di-render. */
 .collection-section,
 .review-section,
 .location-section,
@@ -1237,8 +1233,6 @@ address {
     flex-shrink: 0;
 }
 
-/* Logo huruf "S" untuk CTA Shopee — konsisten dengan gaya ikon sosial lain,
-   berlaku sama di desktop, tablet, maupun mobile (tidak ada override breakpoint). */
 .social-link .social-letter {
     font-family: var(--ff-serif);
     font-weight: 700;

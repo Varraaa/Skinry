@@ -1,19 +1,8 @@
-/**
- * SKINRY – Script.js (Upgraded v2)
- */
+
 'use strict';
 
 /* ============================================================
    1. SECTION NAVIGATION (Navbar desktop + Mobile hamburger)
-   ------------------------------------------------------------
-   - Satu sumber kebenaran untuk: scroll ke section yang benar,
-     menutup mobile menu, dan menandai link aktif (bold) — baik
-     untuk nav desktop maupun mobile.
-   - Tinggi acuan offset scroll memakai `.nav-inner` (BUKAN
-     `#navbar` yang juga membungkus `.mobile-menu`). Ini memperbaiki
-     bug lama: saat mobile-menu sedang collapse, offsetHeight
-     navbar ikut "menggelembung" sesaat sehingga hasil scroll
-     mendarat tidak tepat di section yang dituju.
    ============================================================ */
 (function initSectionNav() {
     const navbar = document.getElementById('navbar');
@@ -149,11 +138,6 @@
 
 /* ============================================================
    2. SMOOTH SCROLL untuk anchor lain (logo, footer link, CTA, dll)
-   ------------------------------------------------------------
-   Nav-link & mobile-nav-link sudah ditangani khusus di atas,
-   sehingga di sini cukup tangani anchor selain keduanya
-   (mis. logo navbar/footer, tombol "Collection" di Hero,
-   footer quick-links) — tetap memakai acuan tinggi nav-inner.
    ============================================================ */
 (function initGenericAnchorScroll() {
     const navInner = document.querySelector('.nav-inner');
