@@ -139,6 +139,18 @@ address {
     padding-block: var(--space-3xl);
 }
 
+/* Performance: lewati kalkulasi layout/paint untuk section di bawah fold
+   sampai pengguna scroll mendekatinya — mempercepat render awal (FCP/LCP)
+   baik di desktop maupun mobile. contain-intrinsic-size mencegah layout
+   shift dengan memberi perkiraan tinggi sebelum section benar-benar di-render. */
+.collection-section,
+.review-section,
+.location-section,
+.cta-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 900px;
+}
+
 .text-center {
     text-align: center;
 }
@@ -1225,6 +1237,16 @@ address {
     flex-shrink: 0;
 }
 
+/* Logo huruf "S" untuk CTA Shopee — konsisten dengan gaya ikon sosial lain,
+   berlaku sama di desktop, tablet, maupun mobile (tidak ada override breakpoint). */
+.social-link .social-letter {
+    font-family: var(--ff-serif);
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 1;
+    user-select: none;
+}
+
 .footer-col-title {
     font-size: 12px;
     font-weight: 600;
@@ -1527,30 +1549,53 @@ address {
         white-space: nowrap;
     }
 
-    /* ---------- About: visual & content sejajar kiri-kanan, badges di bawah-tengah ---------- */
+    /* ---------- About: gambar compact -> "The Skinry Story" -> badges grid 3 (minimalis) ---------- */
     .about-inner {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         grid-template-areas:
-            "visual content"
-            "badges badges";
-        column-gap: 16px;
-        row-gap: 28px;
+            "visual"
+            "content"
+            "badges";
+        row-gap: 20px;
+    }
+
+    .about-visual {
+        max-width: 220px;
+        margin-inline: auto;
     }
 
     .about-content {
-        text-align: left;
+        text-align: center;
+    }
+
+    .about-content .section-heading {
+        font-size: 22px;
+        margin-bottom: 12px;
     }
 
     .about-badges {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 18px 28px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        max-width: 320px;
+        margin-inline: auto;
     }
 
     .about-badge {
-        flex: 0 0 auto;
-        min-width: 80px;
+        gap: 8px;
+    }
+
+    .about-badge .badge-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .about-badge .badge-icon .material-symbols-outlined {
+        font-size: 21px;
+    }
+
+    .about-badge .badge-label {
+        font-size: 10px;
     }
 
     /* ---------- Collection: grid 2 kolom, kartu dipadatkan ---------- */
