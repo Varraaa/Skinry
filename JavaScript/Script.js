@@ -20,8 +20,6 @@
     let resumeTimer = null;
 
     function getNavOffset() {
-        // Selalu pakai tinggi nav-inner (68/64/80px) — stabil,
-        // tidak terpengaruh status buka/tutup mobile-menu.
         return navInner.offsetHeight;
     }
 
@@ -33,7 +31,6 @@
             else link.removeAttribute('aria-current');
         });
 
-        // Footer quick-links juga ikut menandai aktif (opsional, konsisten)
         document.querySelectorAll('.footer-link[data-section]').forEach((link) => {
             link.classList.toggle('active', link.getAttribute('data-section') === sectionId);
         });
@@ -61,7 +58,6 @@
         window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
     }
 
-    /* Klik pada menu navigasi (desktop & mobile) */
     sectionLinks.forEach((link) => {
         link.addEventListener('click', function (e) {
             const hash = this.getAttribute('href');
@@ -69,16 +65,9 @@
             if (!hash || hash.charAt(0) !== '#' || !sectionId) return;
 
             e.preventDefault();
-
-            // 1) Tutup mobile menu dahulu (jika sedang terbuka)
             closeMobileMenu();
-
-            // 2) Set status aktif/bold SEKETIKA saat diklik
             setActiveSection(sectionId);
 
-            // 3) Scroll halus ke section yang benar
-            //    (URL TIDAK diubah — domain tetap bersih, tidak ada "#section"
-            //    yang ditambahkan ke address bar)
             isClickScrolling = true;
             scrollToSection(hash);
 
@@ -87,12 +76,10 @@
         });
     });
 
-    /* Toggle hamburger */
     hamburger?.addEventListener('click', () => {
         hamburger.classList.contains('open') ? closeMobileMenu() : openMobileMenu();
     });
 
-    /* Tutup menu dengan tombol Escape */
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && hamburger?.classList.contains('open')) {
             closeMobileMenu();
@@ -100,7 +87,6 @@
         }
     });
 
-    /* Tutup menu saat klik di luar area menu */
     document.addEventListener('click', (e) => {
         if (!mobileMenu || !hamburger) return;
         const clickedOutside = !mobileMenu.contains(e.target) && !hamburger.contains(e.target);
@@ -109,17 +95,13 @@
         }
     });
 
-    /* Tutup menu otomatis saat resize ke layar desktop */
     window.addEventListener('resize', () => {
         if (window.innerWidth > 768) closeMobileMenu();
     }, { passive: true });
 
-    /* Update navbar "scrolled" style + active link berdasarkan posisi scroll */
     function onScroll() {
         navbar.classList.toggle('scrolled', window.scrollY > 48);
 
-        // Saat baru saja klik menu, biarkan scroll selesai dulu
-        // agar tidak "berebut" status aktif dengan deteksi otomatis.
         if (isClickScrolling) return;
 
         let current = '';
@@ -156,7 +138,6 @@
             const navOffset = navInner ? navInner.offsetHeight : 80;
             const top = target.getBoundingClientRect().top + window.scrollY - navOffset - 4;
             window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
-            // URL TIDAK diubah — domain tetap bersih, tanpa "#section" di address bar
         });
     });
 })();

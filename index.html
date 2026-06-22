@@ -49,13 +49,17 @@
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='16' fill='%237d562d'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-size='18' fill='white'>S</text></svg>" />
     <meta name="theme-color" content="#7d562d" />
     <meta name="msapplication-TileColor" content="#7d562d" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
     <!-- ===== PERFORMANCE: preconnect lebih awal ke domain pihak ketiga ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://lh3.googleusercontent.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.google.com" />
 
     <!-- ===== PERFORMANCE: LCP image (Hero) di-preload agar dirender lebih cepat ===== -->
-    <link rel="preload" as="image" href="Image/Hero.webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="Image/Hero.webp" type="image/webp" fetchpriority="high" />
 
     <!-- ===== PERFORMANCE: 1 request font gabungan, dimuat non-blocking (async) ===== -->
     <link rel="preload" as="style"
@@ -68,7 +72,453 @@
             href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" />
     </noscript>
 
-    <link rel="stylesheet" href="Style/Style.css" />
+    <!-- ===== PERFORMANCE: Critical CSS inline (above-the-fold: navbar + hero) =====
+         Stylesheet utama (Style/Style.css) dimuat secara non-blocking di bawah,
+         sehingga first paint tidak menunggu seluruh CSS turun. ===== -->
+    <style>
+        :root {
+            --clr-primary: #7d562d;
+            --clr-primary-container: #d4a373;
+            --clr-on-primary: #fff;
+            --clr-surface: #faf9f6;
+            --clr-surface-low: #f4f3f1;
+            --clr-surface-lowest: #fff;
+            --clr-on-surface: #1a1c1a;
+            --clr-on-surface-var: #50453b;
+            --clr-outline-var: #d4c4b7;
+            --ff-serif: 'Playfair Display', Georgia, serif;
+            --ff-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --gutter-desk: 64px;
+            --gutter-mob: 20px;
+            --container: 1280px;
+            --r-md: 8px;
+            --r-lg: 12px;
+            --r-xl: 24px;
+            --r-full: 9999px;
+            --shadow-ritual: 0 10px 40px -15px rgba(125, 86, 45, .10);
+            --shadow-card: 0 4px 24px -8px rgba(125, 86, 45, .08);
+            --shadow-hover: 0 16px 48px -12px rgba(125, 86, 45, .16);
+            --ease-out-quart: cubic-bezier(.22, 1, .36, 1);
+            --transition: .3s var(--ease-out-quart)
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%
+        }
+
+        body {
+            font-family: var(--ff-sans);
+            background: var(--clr-surface);
+            color: var(--clr-on-surface);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        ul,
+        ol {
+            list-style: none
+        }
+
+        button {
+            font-family: var(--ff-sans);
+            cursor: pointer;
+            border: none;
+            background: none
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--clr-primary);
+            color: var(--clr-on-primary);
+            padding: 12px 24px;
+            border-radius: var(--r-md);
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 9999;
+            transition: top .2s
+        }
+
+        .skip-link:focus {
+            top: 16px
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--container);
+            margin-inline: auto;
+            padding-inline: var(--gutter-desk)
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--clr-primary);
+            color: var(--clr-on-primary);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+            padding: 14px 32px;
+            border-radius: var(--r-md);
+            border: none;
+            cursor: pointer;
+            text-decoration: none
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--clr-primary);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+            padding: 14px 32px;
+            border-radius: var(--r-md);
+            border: 1px solid var(--clr-outline-var);
+            cursor: pointer;
+            text-decoration: none
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(250, 249, 246, .82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid transparent;
+            transition: box-shadow var(--transition), border-color var(--transition)
+        }
+
+        .nav-inner {
+            max-width: var(--container);
+            margin-inline: auto;
+            padding-inline: var(--gutter-desk);
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px
+        }
+
+        .nav-logo {
+            font-family: var(--ff-serif);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--clr-primary);
+            letter-spacing: -.01em;
+            flex-shrink: 0
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px
+        }
+
+        .nav-link {
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            color: var(--clr-on-surface-var);
+            position: relative;
+            padding-bottom: 4px
+        }
+
+        .nav-cta {
+            padding: 10px 24px;
+            font-size: 12px;
+            flex-shrink: 0
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 40px;
+            height: 40px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            border-radius: var(--r-md);
+            padding: 4px
+        }
+
+        .ham-line {
+            display: block;
+            width: 22px;
+            height: 1.5px;
+            background: var(--clr-on-surface);
+            border-radius: var(--r-full)
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            max-height: 0;
+            overflow: hidden;
+            background: var(--clr-surface-lowest);
+            border-top: 1px solid var(--clr-outline-var)
+        }
+
+        .hero {
+            min-height: 100svh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            background: linear-gradient(145deg, var(--clr-surface) 0%, #f4f1ee 100%);
+            overflow: hidden;
+            position: relative
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+            padding-block: 80px
+        }
+
+        .hero-heading {
+            font-family: var(--ff-serif);
+            font-size: 52px;
+            font-weight: 600;
+            line-height: 1.1;
+            letter-spacing: -.02em;
+            color: var(--clr-on-surface);
+            margin-bottom: 24px
+        }
+
+        .hero-heading em {
+            font-style: italic;
+            font-weight: 500
+        }
+
+        .hero-desc {
+            font-size: 17px;
+            color: var(--clr-on-surface-var);
+            line-height: 1.7;
+            max-width: 480px;
+            margin-bottom: 40px
+        }
+
+        .hero-cta-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px
+        }
+
+        .hero-image-wrap {
+            position: relative
+        }
+
+        .hero-img-frame {
+            aspect-ratio: 4/5;
+            border-radius: var(--r-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-ritual);
+            transform: rotate(2deg)
+        }
+
+        .hero-img-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        .hero-badge {
+            position: absolute;
+            bottom: -32px;
+            left: -32px;
+            background: var(--clr-surface-lowest);
+            padding: 16px 20px;
+            border-radius: var(--r-lg);
+            box-shadow: var(--shadow-card);
+            display: flex;
+            align-items: center;
+            gap: 14px
+        }
+
+        .hero-badge-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--clr-primary-container);
+            border-radius: var(--r-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0
+        }
+
+        .hero-badge-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--clr-primary);
+            line-height: 1.2
+        }
+
+        .hero-badge-sub {
+            font-size: 11px;
+            color: var(--clr-on-surface-var);
+            margin-top: 2px
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(28px)
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            .scroll-reveal {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        @media(max-width:1024px) {
+            .container {
+                padding-inline: 32px
+            }
+
+            .hero-inner {
+                gap: 36px;
+                padding-block: 60px
+            }
+
+            .hero-heading {
+                font-size: 42px
+            }
+
+            .hero-badge {
+                bottom: -20px;
+                left: -16px
+            }
+        }
+
+        @media(max-width:768px) {
+            .container {
+                padding-inline: var(--gutter-mob)
+            }
+
+            .nav-inner {
+                padding-inline: var(--gutter-mob);
+                height: 68px
+            }
+
+            .nav-links {
+                display: none
+            }
+
+            .nav-cta {
+                display: none
+            }
+
+            .hamburger {
+                display: flex
+            }
+
+            .mobile-menu {
+                display: flex
+            }
+
+            .hero {
+                padding-top: 68px
+            }
+
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding-block: 48px 60px;
+                text-align: center
+            }
+
+            .hero-heading {
+                font-size: 34px
+            }
+
+            .hero-desc {
+                font-size: 16px;
+                max-width: 100%;
+                margin-inline: auto
+            }
+
+            .hero-cta-group {
+                justify-content: center
+            }
+
+            .hero-image-wrap {
+                order: -1
+            }
+
+            .hero-img-frame {
+                max-width: 300px;
+                margin-inline: auto;
+                transform: none
+            }
+
+            .hero-badge {
+                bottom: -16px;
+                left: 50%;
+                transform: translateX(-50%);
+                white-space: nowrap
+            }
+        }
+    </style>
+
+    <!-- ===== PERFORMANCE: full stylesheet non-blocking (sama seperti font async-load) ===== -->
+    <link rel="preload" as="style" href="Style/Style.css" />
+    <link rel="stylesheet" href="Style/Style.css" media="print" onload="this.media='all'" />
+    <noscript>
+        <link rel="stylesheet" href="Style/Style.css" />
+    </noscript>
 
     <script
         type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Skinry","alternateName":"Skinry Indonesia","url":"https://www.skinry.id","logo":"https://www.skinry.id/assets/logo.png","description":"Skinry menghadirkan skincare alami, gentle, dan teruji dermatologi untuk ritual perawatan kulit Anda.","foundingDate":"2022","contactPoint":{"@type":"ContactPoint","telephone":"+62-812-3456-7890","contactType":"customer service","availableLanguage":"Indonesian"},"sameAs":["https://www.instagram.com/skinryid","https://www.tiktok.com/@skinryid","https://wa.me/6281234567890","https://shopee.co.id/skinry"]}</script>
@@ -78,6 +528,8 @@
         type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Apakah produk Skinry sudah terdaftar BPOM?","acceptedAnswer":{"@type":"Answer","text":"Ya, seluruh produk Skinry telah mendapatkan sertifikasi BPOM Indonesia, sehingga aman digunakan oleh semua jenis kulit."}},{"@type":"Question","name":"Apakah Skinry cruelty-free?","acceptedAnswer":{"@type":"Answer","text":"Skinry 100% cruelty-free. Kami tidak melakukan pengujian produk pada hewan dan berkomitmen pada standar clean beauty."}},{"@type":"Question","name":"Berapa lama pengiriman produk Skinry?","acceptedAnswer":{"@type":"Answer","text":"Pengiriman ke seluruh Indonesia memakan waktu 2–5 hari kerja. Untuk wilayah Jabodetabek tersedia layanan same-day delivery."}},{"@type":"Question","name":"Bagaimana cara memesan produk Skinry?","acceptedAnswer":{"@type":"Answer","text":"Anda dapat memesan melalui website resmi kami, WhatsApp +62 812 3456 7890, atau langsung mengunjungi Skinry Experience Center di Jl. Senopati No. 88, Jakarta Selatan."}}]}</script>
     <script
         type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Skinry","url":"https://www.skinry.id","description":"Skincare alami, gentle, dan teruji dermatologi untuk ritual perawatan kulit Anda.","inLanguage":"id-ID","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.skinry.id/search?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+    <script
+        type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"Product","position":1,"name":"Glow Serum","description":"Brightening & Hydrating","image":"https://www.skinry.id/Image/Glow Serum.webp","offers":{"@type":"Offer","priceCurrency":"IDR","price":"249000","availability":"https://schema.org/InStock"}},{"@type":"Product","position":2,"name":"Hydrating Mist","description":"Instant Refreshment","image":"https://www.skinry.id/Image/Hydrating Mist.webp","offers":{"@type":"Offer","priceCurrency":"IDR","price":"189000","availability":"https://schema.org/InStock"}},{"@type":"Product","position":3,"name":"Restoring Cream","description":"Deep Overnight Repair","image":"https://www.skinry.id/Image/Facial Cream.webp","offers":{"@type":"Offer","priceCurrency":"IDR","price":"329000","availability":"https://schema.org/InStock"}},{"@type":"Product","position":4,"name":"Daily Shield SPF","description":"Invisible Protection","image":"https://www.skinry.id/Image/Daily Shield SPF.webp","offers":{"@type":"Offer","priceCurrency":"IDR","price":"219000","availability":"https://schema.org/InStock"}},{"@type":"Product","position":5,"name":"Moisturizer","description":"Skin Hydration","image":"https://www.skinry.id/Image/Moisturizer.webp","offers":{"@type":"Offer","priceCurrency":"IDR","price":"119000","availability":"https://schema.org/InStock"}},{"@type":"Product","position":6,"name":"Sunscreen","description":"UV Protection","image":"https://www.skinry.id/Image/Sunscreen.webp","offers":{"@type":"Offer","priceCurrency":"IDR","price":"145000","availability":"https://schema.org/InStock"}},{"@type":"Product","position":7,"name":"Cleanser","description":"Deep Cleansing","image":"https://www.skinry.id/Image/Cleanser.webp","offers":{"@type":"Offer","priceCurrency":"IDR","price":"159000","availability":"https://schema.org/InStock"}},{"@type":"Product","position":8,"name":"Toner","description":"Skin Balancing","image":"https://www.skinry.id/Image/Toner.webp","offers":{"@type":"Offer","priceCurrency":"IDR","price":"126000","availability":"https://schema.org/InStock"}}]}</script>
 </head>
 
 <body>
@@ -232,8 +684,9 @@
                             <div class="product-footer">
                                 <span class="product-price" itemprop="offers" itemscope
                                     itemtype="https://schema.org/Offer">
-                                    <meta itemprop="priceCurrency" content="IDR" /><span itemprop="price"
-                                        content="249000">Rp 249.000</span>
+                                    <meta itemprop="priceCurrency" content="IDR" />
+                                    <meta itemprop="availability" content="https://schema.org/InStock" /><span
+                                        itemprop="price" content="249000">Rp 249.000</span>
                                 </span>
                                 <button class="btn-text" aria-label="Lihat detail Glow Serum">View Detail <span
                                         class="material-symbols-outlined" aria-hidden="true">visibility</span></button>
@@ -254,8 +707,9 @@
                             <div class="product-footer">
                                 <span class="product-price" itemprop="offers" itemscope
                                     itemtype="https://schema.org/Offer">
-                                    <meta itemprop="priceCurrency" content="IDR" /><span itemprop="price"
-                                        content="189000">Rp 189.000</span>
+                                    <meta itemprop="priceCurrency" content="IDR" />
+                                    <meta itemprop="availability" content="https://schema.org/InStock" /><span
+                                        itemprop="price" content="189000">Rp 189.000</span>
                                 </span>
                                 <button class="btn-text" aria-label="Lihat detail Hydrating Mist">View Detail <span
                                         class="material-symbols-outlined" aria-hidden="true">visibility</span></button>
@@ -276,8 +730,9 @@
                             <div class="product-footer">
                                 <span class="product-price" itemprop="offers" itemscope
                                     itemtype="https://schema.org/Offer">
-                                    <meta itemprop="priceCurrency" content="IDR" /><span itemprop="price"
-                                        content="329000">Rp 329.000</span>
+                                    <meta itemprop="priceCurrency" content="IDR" />
+                                    <meta itemprop="availability" content="https://schema.org/InStock" /><span
+                                        itemprop="price" content="329000">Rp 329.000</span>
                                 </span>
                                 <button class="btn-text" aria-label="Lihat detail Restoring Cream">View Detail <span
                                         class="material-symbols-outlined" aria-hidden="true">visibility</span></button>
@@ -298,8 +753,9 @@
                             <div class="product-footer">
                                 <span class="product-price" itemprop="offers" itemscope
                                     itemtype="https://schema.org/Offer">
-                                    <meta itemprop="priceCurrency" content="IDR" /><span itemprop="price"
-                                        content="219000">Rp 219.000</span>
+                                    <meta itemprop="priceCurrency" content="IDR" />
+                                    <meta itemprop="availability" content="https://schema.org/InStock" /><span
+                                        itemprop="price" content="219000">Rp 219.000</span>
                                 </span>
                                 <button class="btn-text" aria-label="Lihat detail Daily Shield SPF">View Detail <span
                                         class="material-symbols-outlined" aria-hidden="true">visibility</span></button>
@@ -320,8 +776,9 @@
                             <div class="product-footer">
                                 <span class="product-price" itemprop="offers" itemscope
                                     itemtype="https://schema.org/Offer">
-                                    <meta itemprop="priceCurrency" content="IDR" /><span itemprop="price"
-                                        content="119000">Rp 119.000</span>
+                                    <meta itemprop="priceCurrency" content="IDR" />
+                                    <meta itemprop="availability" content="https://schema.org/InStock" /><span
+                                        itemprop="price" content="119000">Rp 119.000</span>
                                 </span>
                                 <button class="btn-text" aria-label="Lihat detail Moisturizer">View Detail <span
                                         class="material-symbols-outlined" aria-hidden="true">visibility</span></button>
@@ -342,8 +799,9 @@
                             <div class="product-footer">
                                 <span class="product-price" itemprop="offers" itemscope
                                     itemtype="https://schema.org/Offer">
-                                    <meta itemprop="priceCurrency" content="IDR" /><span itemprop="price"
-                                        content="145000">Rp 145.000</span>
+                                    <meta itemprop="priceCurrency" content="IDR" />
+                                    <meta itemprop="availability" content="https://schema.org/InStock" /><span
+                                        itemprop="price" content="145000">Rp 145.000</span>
                                 </span>
                                 <button class="btn-text" aria-label="Lihat detail Sunscreen">View Detail <span
                                         class="material-symbols-outlined" aria-hidden="true">visibility</span></button>
@@ -364,8 +822,9 @@
                             <div class="product-footer">
                                 <span class="product-price" itemprop="offers" itemscope
                                     itemtype="https://schema.org/Offer">
-                                    <meta itemprop="priceCurrency" content="IDR" /><span itemprop="price"
-                                        content="159000">Rp 159.000</span>
+                                    <meta itemprop="priceCurrency" content="IDR" />
+                                    <meta itemprop="availability" content="https://schema.org/InStock" /><span
+                                        itemprop="price" content="159000">Rp 159.000</span>
                                 </span>
                                 <button class="btn-text" aria-label="Lihat detail Cleanser">View Detail <span
                                         class="material-symbols-outlined" aria-hidden="true">visibility</span></button>
@@ -386,8 +845,9 @@
                             <div class="product-footer">
                                 <span class="product-price" itemprop="offers" itemscope
                                     itemtype="https://schema.org/Offer">
-                                    <meta itemprop="priceCurrency" content="IDR" /><span itemprop="price"
-                                        content="126000">Rp 126.000</span>
+                                    <meta itemprop="priceCurrency" content="IDR" />
+                                    <meta itemprop="availability" content="https://schema.org/InStock" /><span
+                                        itemprop="price" content="126000">Rp 126.000</span>
                                 </span>
                                 <button class="btn-text" aria-label="Lihat detail Toner">View Detail <span
                                         class="material-symbols-outlined" aria-hidden="true">visibility</span></button>
@@ -742,7 +1202,7 @@
                     <div class="map-frame"
                         aria-label="Peta lokasi Skinry Experience Center di Senopati, Jakarta Selatan">
                         <iframe
-                            src="https://www.googlemaps.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.1645707763604!2d106.80251307588565!3d-6.238819360875124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e9d9e9d9a5%3A0x8a1e3a3a3a3a3a3a!2sJl.%20Senopati%2C%20Kebayoran%20Baru%2C%20Jakarta%20Selatan!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.1645707763604!2d106.80251307588565!3d-6.238819360875124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e9d9e9d9a5%3A0x8a1e3a3a3a3a3a3a!2sJl.%20Senopati%2C%20Kebayoran%20Baru%2C%20Jakarta%20Selatan!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
                             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
                             referrerpolicy="no-referrer-when-downgrade"
                             title="Peta lokasi Skinry Experience Center – Jl. Senopati, Kebayoran Baru, Jakarta Selatan"></iframe>

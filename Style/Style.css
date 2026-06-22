@@ -334,7 +334,6 @@ address {
     border-bottom-color: var(--clr-outline-var);
 }
 
-/* nav-inner: tinggi tetap ini dijadikan acuan offset scroll (TIDAK termasuk mobile-menu) */
 .nav-inner {
     max-width: var(--container);
     margin-inline: auto;
@@ -372,7 +371,6 @@ address {
     gap: 36px;
 }
 
-/* === Nav link with animated underline === */
 .nav-link {
     font-size: 13px;
     font-weight: 500;
@@ -425,7 +423,6 @@ address {
     flex-shrink: 0;
 }
 
-/* Hamburger */
 .hamburger {
     display: none;
     flex-direction: column;
@@ -474,7 +471,6 @@ address {
     transform: translateY(-6.5px) rotate(-45deg);
 }
 
-/* Mobile menu */
 .mobile-menu {
     display: none;
     flex-direction: column;
@@ -511,7 +507,6 @@ address {
     background: var(--clr-surface-low);
 }
 
-/* Active state untuk mobile nav (diset langsung saat klik via JS) */
 .mobile-nav-link.active {
     color: var(--clr-primary);
     font-weight: 700;
@@ -656,9 +651,6 @@ address {
     background: var(--clr-surface-lowest);
 }
 
-/* Grid dengan area: visual selalu di kiri (desktop/tablet), badges
-   selalu berada di bawah teks (content). Di mobile, ketiganya stack:
-   visual -> content -> badges (badges berada di tengah-bawah). */
 .about-inner {
     display: grid;
     grid-template-columns: 45% 1fr;
@@ -1159,8 +1151,6 @@ address {
     padding-top: var(--space-3xl);
 }
 
-/* 3 kolom nyata (brand, quick links, contact) — rasio disesuaikan
-   agar tidak ada kolom kosong / tidak rapi di layar lebar */
 .footer-grid {
     display: grid;
     grid-template-columns: 1.4fr 0.8fr 1.1fr;
@@ -1198,7 +1188,6 @@ address {
     max-width: 320px;
 }
 
-/* Social + marketplace icons */
 .footer-socials {
     display: flex;
     flex-wrap: wrap;
@@ -1382,7 +1371,6 @@ address {
     color: var(--clr-on-surface-var);
 }
 
-/* Back to top */
 .back-to-top {
     position: fixed;
     bottom: 32px;
@@ -1478,7 +1466,6 @@ address {
         padding-block: 72px;
     }
 
-    /* ---------- Navbar ---------- */
     .nav-inner {
         padding-inline: var(--gutter-mob);
         height: 68px;
@@ -1500,7 +1487,6 @@ address {
         display: flex;
     }
 
-    /* ---------- Hero ---------- */
     .hero {
         padding-top: 68px;
     }
@@ -1543,7 +1529,6 @@ address {
         white-space: nowrap;
     }
 
-    /* ---------- About: gambar compact -> "The Skinry Story" -> badges grid 3 (minimalis) ---------- */
     .about-inner {
         grid-template-columns: 1fr;
         grid-template-areas:
@@ -1592,7 +1577,6 @@ address {
         font-size: 10px;
     }
 
-    /* ---------- Collection: grid 2 kolom, kartu dipadatkan ---------- */
     .collection-header {
         flex-direction: column;
         align-items: flex-start;
@@ -1643,7 +1627,6 @@ address {
         right: 10px;
     }
 
-    /* ---------- Review: kartu lebih ringkas ---------- */
     .review-section .section-heading {
         margin-bottom: 36px;
     }
@@ -1690,7 +1673,6 @@ address {
         height: 38px;
     }
 
-    /* ---------- Location: map lebih pendek ---------- */
     .location-inner {
         grid-template-columns: 1fr;
         gap: 36px;
@@ -1709,7 +1691,6 @@ address {
         aspect-ratio: 16/9;
     }
 
-    /* ---------- CTA ---------- */
     .cta-heading {
         font-size: 28px;
     }
@@ -1718,7 +1699,6 @@ address {
         font-size: 15px;
     }
 
-    /* ---------- Footer: rata kiri semua ---------- */
     .footer {
         padding-top: 56px;
     }
